@@ -1,0 +1,113 @@
+<html>
+<head>
+	<style>
+		
+		button {
+		    border: 0;
+		    line-height: 2.5;
+		    padding: 0 20px;
+		    font-size: 1rem;
+		    text-align: center;
+		    color: #fff;
+		    text-shadow: 1px 1px 1px #000;
+		    border-radius: 10px;
+		    background-color: rgba(220, 0, 0, 1);
+		    background-image: linear-gradient(to top left,
+		                                      rgba(0, 0, 0, .2),
+		                                      rgba(0, 0, 0, .2) 30%,
+		                                      rgba(0, 0, 0, 0));
+		    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
+		                inset -2px -2px 3px rgba(0, 0, 0, .6);
+		}		
+		</style>
+</head>
+<body>
+<div id="screenshot">
+	<video width="720" height="480"autoplay></video>
+	
+	<img  src="">
+	<canvas style="display:none;"></canvas>
+	<br/>
+
+		<br/>
+		<button class="screenshot-button"style="button">Take Picture</button>
+		<br/>
+		<button class="upload-button" style="display:none">Upload Plate</button>
+</div>
+
+<script>
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	const response = urlParams.get('response')
+	console.log("response param" , response);
+const captureVideoButton =
+  document.querySelector('#screenshot .capture-button');
+const screenshotButton = document.querySelector('#screenshot .screenshot-button');
+const img = document.querySelector('#screenshot img');
+const video = document.querySelector('#screenshot video');
+
+const canvas = document.createElement('canvas');
+
+//captureVideoButton.onclick = function() {
+	var constraints ={ 
+	    video: { }	
+	};
+  navigator.mediaDevices.getUserMedia(constraints).
+    then(handleSuccess).catch(handleError);
+	//};
+
+screenshotButton.onclick = video.onclick = function() {
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  canvas.getContext('2d').drawImage(video, 0, 0);
+  // Other browsers will fall back to image/png
+  img.src = canvas.toDataURL('image/webp');
+  
+  //we have an image -  we can upload to mindee
+  const uploadButton = document.querySelector('#screenshot .upload-button');
+  uploadButton.style="button";
+  
+  //now qwe can upload this form to Mindee API
+  uploadButton.onclick  = function() {
+
+	
+	  //create a form and submit
+	  const form = document.createElement('form');
+	  form.method="POST";
+	  form.action="/";
+	  const hiddenField = document.createElement('input');
+      hiddenField.type = 'hidden';
+      hiddenField.name = 'file';
+      hiddenField.value = img.src;
+	  form.appendChild(hiddenField);
+
+	  const responseField = document.createElement('input');
+      responseField.type = 'hidden';
+      responseField.name = 'responseType';
+      responseField.value = response;
+	  form.appendChild(responseField);
+
+
+	  document.body.appendChild(form);
+	  form.submit();
+	 
+  }
+
+};
+
+function handleSuccess(stream) {
+  screenshotButton.disabled = false;
+  video.srcObject = stream;
+}
+function handleError(stream) {
+	console.log(stream);
+}
+
+
+
+
+</script>
+
+</body>
+
+</html>

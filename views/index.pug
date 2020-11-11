@@ -4,13 +4,13 @@ head
 body
   header.header 
     img(src=schoolImage)
-    h1 Node.js Receipt parsing
+    h1 Node.js UK Plate Scan
 
-  h2 please upload an image of your receipt
+  h2 please upload an image UK plate
 
   
   form(action="/" method = "POST" enctype="multipart/form-data").form  
     p
-    |Your reciept
+    |Your image
     input(type='file', name='imageSource').input   
     input(type='submit', value='Submit')
