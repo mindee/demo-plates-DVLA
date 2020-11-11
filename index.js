@@ -57,7 +57,7 @@ app.post("/", (request, response) => {
 	var newImagePath;
 	var base64Image = false;
 	//if from camera - the image comes in as base64
-	if(fields.file.length>0){
+	if(fields.file){
 		base64Image = true;
 		//base64 immage from camera app
 		console.log("fields", fields.file);
@@ -155,7 +155,7 @@ app.post("/", (request, response) => {
 						var taxStatus = DVLAapiResponse.data.taxStatus;
 						var year = DVLAapiResponse.data.yearOfManufacture;
 						var taxDueDate = DVLAapiResponse.data.taxDueDate;
-						if(responseType.length>0){
+						if(responseType){
 							console.log(responseType);
 							//there could be a bunch of different responses
 							if(responseType === "mot"){
