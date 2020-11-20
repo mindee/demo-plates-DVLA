@@ -115,7 +115,7 @@ app.post("/", (request, response) => {
  				  },
 				  data
  			  }
-			  console.log("config" ,config);
+		//	  console.log("config" ,config);
 			  try {
 				  let apiResponse = await axios(config)
 				  console.log(" api response", apiResponse.data);
@@ -142,7 +142,7 @@ app.post("/", (request, response) => {
 						},
 						data
 					}
-					console.log("DVLAconfig" ,DVLAconfig);
+				//	console.log("DVLAconfig" ,DVLAconfig);
 					try {
 						let DVLAapiResponse = await axios(DVLAconfig)
 						console.log("DVLA response", DVLAapiResponse.data);
