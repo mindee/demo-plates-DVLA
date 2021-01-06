@@ -20,7 +20,7 @@
   "homepage": "https://github.com/dougsillars/mindee_node_receipt#readme",
   "dependencies": {
     "atob": "^2.1.2",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "babel-core": "^6.26.3",
     "babel-node": "0.0.1-security",
     "dotenv": "^8.2.0",
