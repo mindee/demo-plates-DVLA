@@ -168,7 +168,10 @@ app.post("/", (request, response) => {
 							return response.render('receipt',{plate, motStatus, motExpire,fuelType, colour, make, taxStatus, year});
 						}
 					} catch (error) {
-						console.log(error)
+						console.log("DVLA error");
+						console.log(error);
+						
+						return response.render('error',{plate});
 					}		
 
 				  
