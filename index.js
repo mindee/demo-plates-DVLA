@@ -132,7 +132,7 @@ app.post("/", (request, response) => {
 				  
 				  //NOW WE HAVE THE PLATE NUMBER, 
 				  // CALL DVLA TO FIND OUT ABOUT THE CAR 
-				  data = {'registrationNumber': plate};
+				  data = {"registrationNumber": plate};
 				  const DVLAconfig = {
 					method: 'POST',
 					  url: 'https://driver-vehicle-licensing.api.gov.uk/vehicle-enquiry/v1/vehicles',
